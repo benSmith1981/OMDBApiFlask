@@ -14,11 +14,12 @@ def index():
 
         api_key = "f0674f3f"
         year = "2000"
-        url = f"http://www.omdbapi.com/?s={search_query}&y={search_query_year}&apikey={api_key}"
+        url = f"http://www.omdbapi.com/?s={search_query}&y={search_query_year}&type={search_query_type}&apikey={api_key}"
         response = requests.get(url)
         data = response.json()
         print(data) #look in the terminal at the data go to json lint to see the structure
-
+        
+        movies = data["Search"] # this gets the array of movies using the key Search
         #If the response is true from the JSON then send the movies to the webpage...
         if data.get('Response') == 'True':
             return render_template('index.html', movies=movies)
